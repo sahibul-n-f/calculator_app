@@ -54,10 +54,6 @@ class _HomePageState extends State<HomePage> {
                 ),
                 child: ListView(
                   children: [
-                    // Column(
-                    //   mainAxisAlignment: MainAxisAlignment.end,
-                    //   crossAxisAlignment: CrossAxisAlignment.end,
-                    //   children: <Widget>[
                     Container(
                       margin: EdgeInsets.only(top: 50),
                       alignment: Alignment.centerRight,
@@ -86,7 +82,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                // ]),
               ),
             ),
           ),
@@ -163,9 +158,11 @@ class _HomePageState extends State<HomePage> {
                                 count == 4) ||
                             (index == buttons.length - 5 && count == 5)) {
                           return Container(
-                            margin: EdgeInsets.all(mar),
+                            // margin: EdgeInsets.all(mar),
                             decoration: BoxDecoration(
-                              color: Colors.white12,
+                              color: (count == 5)
+                                  ? Colors.transparent
+                                  : Colors.white12,
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Material(
@@ -178,10 +175,6 @@ class _HomePageState extends State<HomePage> {
                                     menu();
                                   });
                                 },
-                                // () => showToast(
-                                //     'There is no function yet',
-                                //     gravity: Toast.BOTTOM,
-                                //     duration: 2),
                                 child: Center(
                                   child: Icon(Icons.now_widgets_rounded,
                                       color: Colors.white, size: 30),
@@ -211,13 +204,15 @@ class _HomePageState extends State<HomePage> {
                                 : Colors.white.withOpacity(0.0),
                             textColor: Colors.white,
                             font: 14,
-                            mar: mar,
+                            // mar: mar,
                             buttonTap: () {
                               setState(() {
                                 question += buttons[index]
                                     .replaceAll("x^", "^")
                                     .replaceAll("1/x", "^-1")
-                                    .replaceAll("e", "2.71828183");
+                                    .replaceAll("PI", "3.14")
+                                    .replaceAll("e", "2.71828183")
+                                    .replaceAll("x!", "!");
                               });
                             },
                           );
@@ -228,15 +223,12 @@ class _HomePageState extends State<HomePage> {
                                 ? Colors.deepPurple
                                 : Colors.white12,
                             textColor: Colors.white,
-                            mar: mar,
+                            // mar: mar,
                             buttonTap: () {
                               setState(() {
                                 question += buttons[index];
-                                showToast(
-                                  buttons[index],
-                                  gravity: Toast.BOTTOM,
-                                  duration: 2,
-                                );
+                                showToast(buttons[index],
+                                    gravity: Toast.BOTTOM, duration: 1);
                               });
                             },
                           );
@@ -262,10 +254,7 @@ class _HomePageState extends State<HomePage> {
 
   void equalPressed() {
     finalQuestion = question;
-    finalQuestion = finalQuestion
-        .replaceAll('x', '*')
-        .replaceAll("PI", "3.14")
-        .replaceAll("(", "*(");
+    finalQuestion = finalQuestion.replaceAll('x', '*').replaceAll("(", "*(");
 
     try {
       Parser p = Parser();
@@ -283,7 +272,7 @@ class _HomePageState extends State<HomePage> {
     Toast.show(msg, context,
         duration: duration,
         gravity: gravity,
-        backgroundColor: Colors.pink[300]);
+        backgroundColor: Colors.pink[400]);
   }
 
   void menu() {
