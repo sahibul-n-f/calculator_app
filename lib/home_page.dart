@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          Expanded(
+          Flexible(
             flex: 2,
             child: ClipRRect(
               borderRadius: BorderRadius.only(
